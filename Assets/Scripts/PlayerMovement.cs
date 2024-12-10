@@ -36,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Wall Movement")]
     public float wallSlideSpeed = 2f;
     bool isWallSliding;
+    bool isWallJumping;
+    float wallJumpDirection;
+    float wallJumpTime = 0.5f;
+    float wallJumpTimer;
+    public Vector2 wallJumpPower = new Vector2(5f, 10f);
 
     void Start()
     {
@@ -45,11 +50,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
+        
         GroundCheck();
         Gravity();
-        Flip();
         WallSlide();
+        WallJump();
+
+        if (!isWallJumping)
+        {
+            rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
+            Flip();
+        } 
+        
     }
 
     private void Gravity()
@@ -98,6 +110,25 @@ public class PlayerMovement : MonoBehaviour
                 jumpsRemaining--;
             }
         }
+
+        //WallJump
+        if (context.performed && wallJumpTimer > 0f)
+        {
+            isWallJumping = true;
+            rb.velocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);
+            wallJumpTimer = 0;
+
+            //Force Flip
+            if(transform.localScale.x != wallJumpDirection)
+            {
+                isFacingRight = !isFacingRight;
+                Vector3 ls = transform.localScale;
+                ls.x *= -1f;
+                transform.localScale = ls;
+            }
+
+            Invoke(nameof(CancelWallJump), wallJumpTime +0.1f);
+        }
     }
 
     private void GroundCheck()
@@ -124,6 +155,27 @@ public class PlayerMovement : MonoBehaviour
         {
             isWallSliding = false;
         }
+    }
+
+    private void WallJump()
+    {
+        if (isWallSliding)
+        {
+            isWallJumping = false;
+            wallJumpDirection = -transform.localScale.x;
+            wallJumpTimer = wallJumpTime;
+
+            CancelInvoke(nameof(CancelWallJump));
+        }
+        else if (wallJumpTimer > 0f)
+        {
+            wallJumpTimer -= Time.deltaTime;
+        }
+    }
+
+    private void CancelWallJump()
+    {
+        isWallJumping = false;
     }
 
     private bool WallCheck()
