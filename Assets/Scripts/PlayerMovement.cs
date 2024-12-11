@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     bool isFacingRight = true;
     public Animator animator;
+    public ParticleSystem smokeFX;
 
     [Header("Movement")]
     public float moveSpeed = 5;
@@ -65,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator.SetBool("isWalking", Mathf.Abs(horizontalMovement) > 0);
-
+        smokeFX.Play();
     }
 
     private void Gravity()
@@ -94,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 ls = transform.localScale;
             ls.x *= -1f;
             transform.localScale = ls;
+            smokeFX.Play();
         }
     }
 
@@ -138,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = false;
             animator.SetBool("isJumping", true);
+            smokeFX.Play();
         }
     }
 
@@ -148,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
             isWallSliding = true;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, -wallSlideSpeed));
             animator.SetBool("isWallSliding", true);
+            smokeFX.Play();
             animator.SetBool("isJumping", false);
         }
         else
