@@ -64,9 +64,8 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
 
-        animator.SetFloat("yVelocity", rb.velocity.y);
-        animator.SetFloat("magnitude", rb.velocity.x);
-        animator.SetBool("isWallSliding", isWallSliding);
+        animator.SetBool("isWalking", Mathf.Abs(horizontalMovement) > 0);
+
     }
 
     private void Gravity()
@@ -100,23 +99,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (jumpsRemaining > 0)
+        if (jumpsRemaining > 0 && context.performed)
         {
-            if (context.performed)
-            {
-                //Long Jump
-                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-                jumpsRemaining--;
-                animator.SetTrigger("Jump");
-            }
-            else if (context.canceled)
-            {
-                //Small Jump
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-                jumpsRemaining--;
-                animator.SetTrigger("Jump");
-            }
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            jumpsRemaining--;
         }
+
 
         //WallJump
         if (context.performed && wallJumpTimer > 0f)
@@ -124,7 +112,6 @@ public class PlayerMovement : MonoBehaviour
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);
             wallJumpTimer = 0;
-            animator.SetTrigger("Jump");
 
             //Force Flip
             if (transform.localScale.x != wallJumpDirection)
@@ -145,10 +132,12 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpsRemaining = maxJumps;
             isGrounded = true;
+            animator.SetBool("isJumping", false);
         }
         else
         {
             isGrounded = false;
+            animator.SetBool("isJumping", true);
         }
     }
 
@@ -158,10 +147,13 @@ public class PlayerMovement : MonoBehaviour
         {
             isWallSliding = true;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, -wallSlideSpeed));
+            animator.SetBool("isWallSliding", true);
+            animator.SetBool("isJumping", false);
         }
         else
         {
             isWallSliding = false;
+            animator.SetBool("isWallSliding", false);
         }
     }
 
