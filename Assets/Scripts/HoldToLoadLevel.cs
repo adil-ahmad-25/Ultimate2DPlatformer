@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class HoldToLoadLevel : MonoBehaviour
     private float holdTimer = 0;
     private bool isHolding = false;
 
+    public static event Action OnHoldComplete;
+
     void Update()
     {
         if (isHolding)
@@ -20,7 +23,8 @@ public class HoldToLoadLevel : MonoBehaviour
 
             if (holdTimer >= holdDuration)
             {
-
+                OnHoldComplete.Invoke();
+                ResetHold();
             }
         }
     }
