@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     public float jumpForce = 2f;
     public LayerMask groundLayer;
 
+    public int damage = 1;
+
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool shouldJump;
