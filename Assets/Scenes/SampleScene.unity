@@ -10293,7 +10293,7 @@ MonoBehaviour:
   - {fileID: 1002336398636092239, guid: bb060bf9bd2e32c47a12da038854b720, type: 3}
   - {fileID: 843824972820534265, guid: cb77108449259c34197a7075135ccc1c, type: 3}
   GemProbability: 1
-  enemyProbability: 0.5
+  enemyProbability: 0.1
   maxObjects: 5
   gemLifeTime: 10
   spawnInterval: 1
