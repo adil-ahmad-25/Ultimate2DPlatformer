@@ -30,12 +30,27 @@ public class ObjectSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!tilemap.gameObject.activeInHierarchy)
+        {
+            LevelChange();
+        }
         
+        if (!isSpawning && ActiveObjectCount() < maxObjects)
+        {
+            StartCoroutine(SpawnObjectsIfNeeded());
+        }
+    }
+
+    private void LevelChange()
+    {
+        tilemap = GameObject.Find("Ground").GetComponent<Tilemap>();
+        GatherValidPositions();
+        DestroyAllSpawnedObjects();
     }
 
     private int ActiveObjectCount()
     {
-        spawnObjects.RemoveAll(item => item = null);
+        spawnObjects.RemoveAll(item => item == null);
         return spawnObjects.Count;
     }
     
@@ -119,6 +134,18 @@ public class ObjectSpawner : MonoBehaviour
             validSpawnPosition.Add(gameObject.transform.position);
             Destroy(gameObject);
         }
+    }
+
+    private void DestroyAllSpawnedObjects()
+    {
+        foreach(GameObject obj in spawnObjects)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }          
+        }
+        spawnObjects.Clear();   
     }
 
     private void GatherValidPositions()
