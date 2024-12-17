@@ -3178,6 +3178,7 @@ GameObject:
   - component: {fileID: 834822478}
   - component: {fileID: 834822477}
   - component: {fileID: 834822479}
+  - component: {fileID: 834822480}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3561,6 +3562,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   healthUI: {fileID: 1636107350}
+--- !u!114 &834822480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834822469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c3f16cc3066a74482cc31f8d0fb95f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 936502535934798167, guid: 5c61eb9404f0c0143a9e73da046beb46, type: 3}
+  bulletSpeed: 50
 --- !u!1 &864278018
 GameObject:
   m_ObjectHideFlags: 0
@@ -4394,7 +4409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1460605644
 RectTransform:
   m_ObjectHideFlags: 0

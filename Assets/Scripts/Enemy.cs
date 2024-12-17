@@ -14,6 +14,11 @@ public class Enemy : MonoBehaviour
 
     public int damage = 1;
 
+    public int maxHealth = 2;
+    private int currentHealth;
+    private SpriteRenderer spriteRenderer;
+    private Color ogColor;
+
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool shouldJump;
@@ -23,6 +28,9 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
+        ogColor = spriteRenderer.color;
     }
 
     // Update is called once per frame
@@ -74,4 +82,28 @@ public class Enemy : MonoBehaviour
             rb.AddForce(new Vector2(jumpDirection.x, jumpForce), ForceMode2D.Impulse);
         }
     }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        StartCoroutine(FlashWhite());
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private IEnumerator FlashWhite()
+    {
+        spriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(0.3f);
+        spriteRenderer.color = ogColor;
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
+
+
 }
