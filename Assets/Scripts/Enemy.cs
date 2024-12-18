@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -22,6 +23,10 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool shouldJump;
+
+    [Header ("Loot Table")]
+    public List<LootItem> lootTable = new List<LootItem>();
+
     
     // Start is called before the first frame update
     void Start()
@@ -102,8 +107,25 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        foreach (LootItem lootItem in lootTable)
+        {
+            if (Random.Range(0f, 100f) <= lootItem.dropChance)
+            {
+                InstantiateLoot(lootItem.itemPrefab);
+            }
+            break;
+        }
+        
         Destroy(gameObject);
     }
 
+    void InstantiateLoot(GameObject loot)
+    {
+        if (loot)
+        {
+            GameObject droppedLoot = Instantiate(loot, transform.position, Quaternion.identity);
 
+            droppedLoot.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+    }
 }
