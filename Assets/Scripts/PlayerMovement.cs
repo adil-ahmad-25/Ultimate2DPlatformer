@@ -14,6 +14,14 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5;
     float horizontalMovement;
 
+    [Header("Dash")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.1f;
+    public float dashCooldown = 0.1f;
+    bool isDashing;
+    bool canDash = true;
+    TrailRenderer trailRenderer;
+
     [Header("Jumping")]
     public float jumpPower = 10f;
     public int maxJumps = 2;
@@ -48,12 +56,20 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
 
     void Update()
     {
-        
+        animator.SetBool("isWalking", Mathf.Abs(horizontalMovement) > 0);
+        smokeFX.Play();
+
+        if (isDashing)
+        {
+            return;
+        }
+
         GroundCheck();
         Gravity();
         WallSlide();
@@ -63,10 +79,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
             Flip();
-        }
-
-        animator.SetBool("isWalking", Mathf.Abs(horizontalMovement) > 0);
-        smokeFX.Play();
+        }   
     }
 
     private void Gravity()
@@ -85,6 +98,37 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x;
+    }
+
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if(context.performed && canDash)
+        {
+            StartCoroutine(DashCouroutine());
+        }
+    }
+
+    private IEnumerator DashCouroutine()
+    {
+        Physics2D.IgnoreLayerCollision(7, 8, true);
+        canDash = false;
+        isDashing = true;
+        trailRenderer.emitting = true;
+
+        float dashDirection = isFacingRight ? 1f : -1f;
+
+        rb.velocity = new Vector2(dashDirection * dashSpeed, rb.velocity.y);
+
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.velocity = new Vector2(0f, rb.velocity.y);
+
+        isDashing = false;
+        trailRenderer.emitting = false;
+        Physics2D.IgnoreLayerCollision(7, 8, false);
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     private void Flip()
