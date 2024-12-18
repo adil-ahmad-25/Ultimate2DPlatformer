@@ -11239,6 +11239,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 834822471}
+    - target: {fileID: 6685882907153990109, guid: cb77108449259c34197a7075135ccc1c, type: 3}
+      propertyPath: lootTable.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685882907153990109, guid: cb77108449259c34197a7075135ccc1c, type: 3}
+      propertyPath: lootTable.Array.data[1].dropChance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685882907153990109, guid: cb77108449259c34197a7075135ccc1c, type: 3}
+      propertyPath: lootTable.Array.data[1].itemPrefab
+      value: 
+      objectReference: {fileID: 2271264429514976138, guid: 63198fbbf2abdbc4aa17b1745a16f535, type: 3}
     - target: {fileID: 8420081107567833303, guid: cb77108449259c34197a7075135ccc1c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.56139386
