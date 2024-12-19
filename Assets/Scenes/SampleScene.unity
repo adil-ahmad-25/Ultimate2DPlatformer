@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 360815171}
   m_Layer: 3
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2225,6 +2225,32 @@ CompositeCollider2D:
         Y: 9666666
       - X: -59666668
         Y: 9666666
+    - - X: -39666668
+        Y: -6333333
+      - X: -40333332
+        Y: -4333333
+      - X: -42333332
+        Y: -3666666
+      - X: -47666668
+        Y: -2333333
+      - X: -50333332
+        Y: -6333333
+      - X: -50333332
+        Y: -10333333
+      - X: -39666668
+        Y: -10333333
+    - - X: 40333332
+        Y: -8333333
+      - X: 40333332
+        Y: -4333333
+      - X: 29666666
+        Y: -4333333
+      - X: 29666666
+        Y: -7666666
+      - X: 32333334
+        Y: -10333333
+      - X: 37666668
+        Y: -10333333
   m_CompositePaths:
     m_Paths:
     - - {x: -5.9666963, y: 0.96666664}
@@ -2241,6 +2267,19 @@ CompositeCollider2D:
       - {x: -8.633364, y: 9.033334}
       - {x: -9.033334, y: 9.033304}
       - {x: -9.033304, y: -5.0333333}
+    - - {x: -3.966696, y: -1.0333333}
+      - {x: -3.9666681, y: -0.6333295}
+      - {x: -4.0333457, y: -0.4333291}
+      - {x: -4.233335, y: -0.36666602}
+      - {x: -4.766678, y: -0.2333494}
+      - {x: -5.0333333, y: -0.633341}
+      - {x: -5.033304, y: -1.0333333}
+    - - {x: 3.7666585, y: -1.0333333}
+      - {x: 4.0333333, y: -0.8333201}
+      - {x: 4.033304, y: -0.4333333}
+      - {x: 2.9666667, y: -0.4333626}
+      - {x: 2.9666743, y: -0.7666742}
+      - {x: 3.2333443, y: -1.0333333}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -2616,6 +2655,26 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -5, y: -1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 5
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 3, y: -1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 8, y: -1, z: 0}
     second:
       serializedVersion: 2
@@ -2846,10 +2905,10 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: be2982bc1c4d9d24cae100fe3251c476, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 7c70a84b2976e224c86691e345f67ec0, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: ed17840489b42fe42af57e8dd0ba6929, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 93816971d5955bf41a62f04cb255b979, type: 2}
   - m_RefCount: 16
@@ -2861,10 +2920,10 @@ Tilemap:
     m_Data: {fileID: 1100404327, guid: 82e7044c6e963f44ebbaabc537d8a53e, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1233163158, guid: 82e7044c6e963f44ebbaabc537d8a53e, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -1355802700, guid: 82e7044c6e963f44ebbaabc537d8a53e, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 2100201690, guid: 82e7044c6e963f44ebbaabc537d8a53e, type: 3}
   - m_RefCount: 1
@@ -2872,7 +2931,7 @@ Tilemap:
   - m_RefCount: 16
     m_Data: {fileID: 1438875827, guid: 82e7044c6e963f44ebbaabc537d8a53e, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 39
+  - m_RefCount: 41
     m_Data:
       e00: 1
       e01: 0
@@ -2909,7 +2968,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 47
+  - m_RefCount: 49
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -3459,6 +3518,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ca48f3d0-e9a0-41a0-b063-89760c86ca5b
     m_ActionName: Player/Dash[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 834822475}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Drop
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b59742c4-d46f-442e-b42e-b6041552bb05
+    m_ActionName: Player/Drop[/Keyboard/s,/Keyboard/downArrow]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4574,7 +4649,7 @@ GameObject:
   - component: {fileID: 1625655443}
   m_Layer: 3
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
